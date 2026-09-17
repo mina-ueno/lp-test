@@ -39,10 +39,16 @@
     margin:0;
     color:var(--ink);
   }
+  b{color:var(--rose-deep);font-weight:700;}
   .measure{max-width:660px;margin:0 auto;padding:0 28px;}
   .measure-wide{max-width:920px;margin:0 auto;padding:0 28px;}
   section{position:relative;}
-  .band-alt{background:var(--paper-alt);}
+  .band-alt{
+    background:
+      radial-gradient(560px 340px at 88% -6%, rgba(147,120,155,.12), transparent 60%),
+      radial-gradient(480px 320px at 4% 104%, rgba(126,143,98,.12), transparent 55%),
+      var(--paper-alt);
+  }
   .band-surface{background:var(--surface);}
   .pad{padding:88px 0;}
   .pad-sm{padding:64px 0;}
@@ -55,8 +61,21 @@
   .rule-curve{width:100%;height:64px;display:block;}
 
   /* ---------- HERO ---------- */
+  .hero-photo-wrap{
+    width:100%;max-width:1800px;margin:0 auto;line-height:0;
+    position:relative;overflow:hidden;
+  }
+  .hero-photo-wrap img{
+    width:100%;height:auto;display:block;
+    max-height:78vh;object-fit:cover;
+  }
+  .hero-photo-wrap::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg, rgba(43,27,16,0) 60%, rgba(43,27,16,.28) 100%);
+    pointer-events:none;
+  }
   .hero{
-    padding:120px 0 96px;
+    padding:56px 0 96px;
     overflow:hidden;
     background:
       radial-gradient(720px 420px at 12% -8%, rgba(196,104,95,.14), transparent 60%),
@@ -66,11 +85,6 @@
   .beam{position:absolute;background:linear-gradient(90deg, rgba(196,104,95,0) 0%, rgba(196,104,95,.10) 50%, rgba(196,104,95,0) 100%);pointer-events:none;}
   .beam.b1{width:1400px;height:70px;left:-380px;top:60px;transform:rotate(-16deg);}
   .beam.b2{width:1400px;height:50px;left:-260px;top:340px;transform:rotate(-16deg);opacity:.7;}
-  .hero-photo-wrap{max-width:1040px;margin:0 auto 48px;padding:0 28px;}
-  .hero-photo-wrap img{
-    width:100%;border-radius:4px;
-    box-shadow:0 26px 60px rgba(43,27,16,.22);
-  }
   .hero-inner{position:relative;text-align:center;}
   .hero h1{
     font-size:clamp(30px,5.6vw,46px);
@@ -155,16 +169,23 @@
   }
 
   /* ---------- CAUSE / HABITS ---------- */
-  .habit-table{margin-top:36px;display:flex;flex-direction:column;gap:0;}
+  .habit-table{margin-top:36px;display:flex;flex-direction:column;gap:14px;}
   .habit-row{
-    display:grid;grid-template-columns:120px 1fr;gap:22px;
-    padding:24px 0;border-top:1px solid var(--line-soft);
+    display:grid;grid-template-columns:120px 1fr;gap:22px;align-items:start;
+    padding:24px 26px;background:var(--surface);border-radius:4px;
+    box-shadow:0 10px 26px rgba(43,27,16,.08);
+    border-left:4px solid var(--line);
   }
-  .habit-row:last-child{border-bottom:1px solid var(--line-soft);}
+  .habit-row.h1{border-left-color:var(--rose-deep);}
+  .habit-row.h2{border-left-color:var(--gold);}
+  .habit-row.h3{border-left-color:var(--plum);}
   .habit-name{
-    font-family:"Shippori Mincho B1",serif;font-weight:700;font-size:17px;
-    color:var(--ink);white-space:nowrap;
+    font-family:"Shippori Mincho B1",serif;font-weight:700;font-size:19px;
+    white-space:nowrap;
   }
+  .habit-row.h1 .habit-name{color:var(--rose-deep);}
+  .habit-row.h2 .habit-name{color:var(--gold);}
+  .habit-row.h3 .habit-name{color:var(--plum);}
   .habit-name span{display:block;font-size:11px;font-weight:400;color:var(--ink-soft);margin-top:4px;letter-spacing:.04em;}
   .habit-desc p{margin:0 0 8px;font-size:15px;}
   .habit-quote{
@@ -204,7 +225,16 @@
   .pillar.p1 .top-rule{background:var(--sage);}
   .pillar.p2 .top-rule{background:var(--gold);}
   .pillar.p3 .top-rule{background:var(--plum);}
-  .pillar h3{font-size:19px;margin-bottom:4px;}
+  .pillar h3{
+    font-size:26px;margin-bottom:4px;letter-spacing:.04em;
+  }
+  .pillar h3::before{font-size:13px;margin-right:8px;vertical-align:3px;}
+  .pillar.p1 h3{color:var(--sage);}
+  .pillar.p1 h3::before{content:"◆";color:var(--sage);}
+  .pillar.p2 h3{color:var(--gold);}
+  .pillar.p2 h3::before{content:"◆";color:var(--gold);}
+  .pillar.p3 h3{color:var(--plum);}
+  .pillar.p3 h3::before{content:"◆";color:var(--plum);}
   .pillar .kana{font-size:12px;letter-spacing:.1em;color:var(--ink-soft);display:block;margin-bottom:14px;}
   .ba-row{font-size:14px;margin-top:12px;}
   .ba-label{font-size:11px;font-weight:700;letter-spacing:.08em;color:var(--ink-soft);display:block;margin-bottom:4px;}
@@ -279,7 +309,13 @@
   }
   .profile-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 18%;}
   .profile-name{font-size:22px;margin-bottom:2px;}
-  .profile-role{font-size:13px;color:var(--ink-soft);letter-spacing:.05em;margin-bottom:20px;display:block;}
+  .profile-role{font-size:13px;color:var(--ink-soft);letter-spacing:.05em;margin-bottom:14px;display:block;}
+  .profile-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px;}
+  .profile-tags span{
+    font-size:12px;font-weight:700;color:var(--rose-deep);
+    background:var(--paper-alt);border-radius:20px;padding:6px 14px;
+    letter-spacing:.02em;
+  }
   .profile-body p{font-size:15px;margin:0 0 16px;}
   .stat-row{
     display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
@@ -334,11 +370,11 @@
 <body>
 
 <!-- ============ HERO ============ -->
+<div class="hero-photo-wrap">
+  <img src="hero-photo.png" alt="夕暮れの渚を、光に向かって歩いていく女性のシルエット">
+</div>
 <section class="hero">
   <div class="beam b1"></div><div class="beam b2"></div>
-  <div class="hero-photo-wrap">
-    <img src="hero-photo.png" alt="夕暮れの渚を、光に向かって歩いていく女性のシルエット">
-  </div>
   <div class="measure hero-inner">
     <span class="eyebrow">40代・50代女性のための無料セミナー</span>
     <h1>頑張っているのに、<br>現実が動かない。</h1>
@@ -374,7 +410,7 @@
 <section class="band-surface pad">
   <div class="measure">
     <span class="eyebrow">こんなこと、ありませんか</span>
-    <h2 style="font-size:26px;margin-top:16px;">頑張っているのに、<br>現実だけが動かない。</h2>
+    <h2 style="font-size:28px;margin-top:16px;">頑張っているのに、<br><b>現実だけが動かない。</b></h2>
     <ul class="sym-list">
       <li><span class="sym-mark"></span>本もたくさん読んだ。セミナーにも出た。学ぶこと自体は、ずっと続けてきた</li>
       <li><span class="sym-mark"></span>家族のことも、仕事のことも、ちゃんとやってきた</li>
@@ -390,7 +426,7 @@
 <section class="band-alt pad">
   <div class="measure">
     <span class="eyebrow">本当の理由</span>
-    <h2 style="font-size:26px;margin-top:16px;">頑張っているのに動かないのは、<br>頑張り方のせいじゃない。</h2>
+    <h2 style="font-size:28px;margin-top:16px;">頑張っているのに動かないのは、<br><b>頑張り方のせいじゃない。</b></h2>
     <p style="margin-top:22px;font-size:15px;color:var(--ink-soft);">
       結果を決めているのは、行動の量ではなく、行動を生み出している「内側の状態」です。<br>
       同じ「仕事をする」でも、「お金がなくなったらどうしよう」という恐れから動くのか、
@@ -403,21 +439,21 @@
     </div>
 
     <div class="habit-table">
-      <div class="habit-row">
+      <div class="habit-row h1">
         <div class="habit-name">過去グセ<span>終わったことに戻る</span></div>
         <div class="habit-desc">
           <p>終わったことの中へ、何度も意識が戻ってしまう。</p>
           <p class="habit-quote">「あのとき、こうすればよかった」</p>
         </div>
       </div>
-      <div class="habit-row">
+      <div class="habit-row h2">
         <div class="habit-name">未来グセ<span>取り越し苦労</span></div>
         <div class="habit-desc">
           <p>まだ起きていない苦しみを、先回りして体験してしまう。</p>
           <p class="habit-quote">「失敗したら、どうしよう」</p>
         </div>
       </div>
-      <div class="habit-row">
+      <div class="habit-row h3">
         <div class="habit-name">反応グセ<span>いつもの感情に戻る</span></div>
         <div class="habit-desc">
           <p>何かあるたび、いつもの感情のパターンへ戻ってしまう。</p>
@@ -437,7 +473,7 @@
 <section class="band-surface pad">
   <div class="measure">
     <span class="eyebrow">気づくために、まずやること</span>
-    <h2 style="font-size:26px;margin-top:16px;">戻る力の名前は、<br>「整う」です。</h2>
+    <h2 style="font-size:28px;margin-top:16px;">戻る力の名前は、<br>「<b>整う</b>」です。</h2>
 
     <div class="breath-mark" aria-hidden="true">
       <svg viewBox="0 0 64 64" width="52" height="52" fill="none">
@@ -473,7 +509,7 @@
 <section class="band-alt pad">
   <div class="measure-wide">
     <span class="eyebrow">気づきを、日々の現実に変える3つの方法</span>
-    <h2 style="font-size:26px;margin-top:16px;max-width:660px;">当日は3分の呼吸ワークも、<br>実際に一緒にやってみます。</h2>
+    <h2 style="font-size:28px;margin-top:16px;max-width:660px;">当日は<b>3分の呼吸ワーク</b>も、<br>実際に一緒にやってみます。</h2>
 
     <div class="pillars">
       <div class="pillar p1">
@@ -500,7 +536,7 @@
     </div>
 
     <p class="pillars-close">どれか1つだけでは、しばらくすると元に戻ってしまいます。<br>
-    3つそろって初めて、「わかったのに、また同じことをしてしまう」という繰り返しから抜けられます。</p>
+<b>3つそろって初めて</b>、「わかったのに、また同じことをしてしまう」という繰り返しから抜けられます。</p>
   </div>
 </section>
 
@@ -508,7 +544,7 @@
 <section class="band-surface pad">
   <div class="measure">
     <span class="eyebrow">当日、実際にやること</span>
-    <h2 style="font-size:26px;margin-top:16px;">話を聞くだけでは、終わりません。</h2>
+    <h2 style="font-size:28px;margin-top:16px;">話を聞くだけでは、<b>終わりません。</b></h2>
 
     <ul class="day-list">
       <li><div class="day-body"><div class="t">頑張っているのに動かない、本当の理由</div><div class="d">今日お伝えした内容を、もう少し詳しく、あなた自身に当てはめてお話しします</div></div></li>
@@ -529,6 +565,7 @@
       <div class="profile-body">
         <h3 class="profile-name">上野美奈</h3>
         <span class="profile-role">人生再設計プロデューサー・横浜</span>
+        <div class="profile-tags"><span>脳科学の翻訳者</span><span>元会社員・7回転職</span><span>起業7年目</span></div>
         <p>実は、60歳になるのが怖かった人間です。体力も、視力も、握力も、こっそり変わっていく。「これから、できないことが増えるだけなんじゃないか」と、本気で不安になりました。</p>
         <p>でも今は、そうは思っていません。人生後半は、何かを諦めていく時間ではなく、経験を持った今だからこそ、選び直せる時間だと思っています。</p>
         <div class="stat-row">
@@ -546,7 +583,7 @@
 <section class="band-surface pad">
   <div class="measure-wide">
     <span class="eyebrow">受けた方の変化</span>
-    <h2 style="font-size:26px;margin-top:16px;max-width:660px;">話を聞いた先に、<br>こんな変化があります。</h2>
+    <h2 style="font-size:28px;margin-top:16px;max-width:660px;">話を聞いた先に、<br><b>こんな変化</b>があります。</h2>
 
     <div class="stories">
       <div class="story-card s1">
