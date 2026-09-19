@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>思考グセ診断</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;500;600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap">
+<style>
+  :root{
+    --paper:#FBF4E9;
+    --paper-alt:#F2E4D0;
+    --surface:#FFFFFF;
+    --ink:#2B1B10;
+    --ink-soft:#7A6656;
+    --rose:#C4685F;
+    --rose-deep:#A8483F;
+    --sage:#7E8F62;
+    --gold:#BC8A3E;
+    --plum:#93789B;
+    --slate:#6E7F8C;
+    --line:rgba(43,27,16,.14);
+    --line-soft:rgba(43,27,16,.08);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Zen Kaku Gothic New","Hiragino Sans","Yu Gothic",sans-serif;
+    -webkit-font-smoothing:antialiased;
+    line-height:1.9;
+    min-height:100vh;
+    display:flex;
+    align-items:flex-start;
+    justify-content:center;
+    padding:48px 18px;
+  }
+  h1,h2,h3{
+    font-family:"Shippori Mincho B1","Yu Mincho",serif;
+    font-weight:700;
+    text-wrap:balance;
+    margin:0;
+    color:var(--ink);
+  }
+  .card{
+    width:100%;max-width:520px;
+    background:var(--surface);
+    border-radius:4px;
+    box-shadow:0 1px 0 var(--line), 0 24px 48px rgba(43,27,16,.10);
+    padding:40px 30px 34px;
+    position:relative;
+    overflow:hidden;
+  }
+  .card::before{
+    content:"";position:absolute;top:0;left:0;right:0;height:4px;
+    background:linear-gradient(90deg, var(--rose-deep), var(--gold), var(--sage), var(--plum), var(--slate));
+  }
+
+  /* ---------- intro ---------- */
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:10px;
+    font-size:12px;letter-spacing:.14em;color:var(--ink-soft);font-weight:700;
+  }
+  .eyebrow::before{content:"";width:18px;height:1px;background:var(--rose);display:inline-block;}
+  #intro h1{font-size:clamp(26px,6vw,32px);margin:16px 0 18px;line-height:1.5;}
+  #intro p{font-size:15px;color:var(--ink-soft);margin:0 0 10px;}
+  .type-chip-row{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 28px;}
+  .type-chip{
+    font-size:12px;font-family:"Shippori Mincho B1",serif;font-weight:700;
+    padding:6px 12px;border-radius:999px;color:#fff;
+  }
+  .btn{
+    display:inline-block;width:100%;text-align:center;
+    background:var(--rose-deep);color:var(--paper);
+    font-family:"Shippori Mincho B1",serif;font-weight:700;font-size:16px;
+    padding:16px 20px;border-radius:2px;border:none;cursor:pointer;
+    letter-spacing:.03em;
+  }
+  .btn:active{opacity:.85;}
+  .btn.secondary{
+    background:transparent;color:var(--rose-deep);
+    border:1px solid var(--rose-deep);
+  }
+
+  /* ---------- quiz ---------- */
+  #quiz{display:none;}
+  .progress-wrap{margin-bottom:22px;}
+  .progress-label{font-size:12px;color:var(--ink-soft);letter-spacing:.05em;margin-bottom:8px;font-variant-numeric:tabular-nums;}
+  .progress-track{height:4px;background:var(--line-soft);border-radius:2px;overflow:hidden;}
+  .progress-fill{height:100%;background:var(--rose-deep);border-radius:2px;transition:width .3s ease;}
+  .q-text{font-size:18px;font-weight:700;margin:0 0 22px;line-height:1.7;font-family:"Shippori Mincho B1",serif;}
+  .options{display:flex;flex-direction:column;gap:10px;}
+  .opt{
+    text-align:left;
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:3px;
+    padding:14px 16px;
+    font-size:14.5px;
+    color:var(--ink);
+    cursor:pointer;
+    line-height:1.7;
+  }
+  .opt:hover{border-color:var(--rose-deep);background:var(--paper-alt);}
+
+  /* ---------- result ---------- */
+  #result{display:none;text-align:center;}
+  .result-badge{
+    display:inline-block;font-size:12px;font-weight:700;letter-spacing:.1em;
+    color:var(--ink-soft);margin-bottom:10px;
+  }
+  #result h2{font-size:clamp(26px,7vw,34px);margin-bottom:6px;}
+  #result .subname{font-size:14px;color:var(--ink-soft);margin-bottom:26px;}
+  #result .desc{font-size:15px;color:var(--ink);text-align:left;margin-bottom:26px;white-space:pre-line;}
+  .bridge-box{
+    background:var(--paper-alt);border-radius:3px;padding:20px;margin-bottom:26px;
+    text-align:left;font-size:14px;color:var(--ink-soft);
+  }
+  .bridge-box b{color:var(--ink);}
+  .retry{margin-top:16px;background:none;border:none;color:var(--ink-soft);font-size:13px;text-decoration:underline;cursor:pointer;}
+</style>
+</head>
+<body>
+
+<div class="card">
+
+  <div id="intro">
+    <span class="eyebrow">3分でわかる</span>
+    <h1>思考グセ診断</h1>
+    <p>頑張っているのに、なぜか現実が動かない——それは、頑張り方のせいではなく、無意識に繰り返している「思考のクセ」のせいかもしれません。</p>
+    <p>6つの質問に答えると、あなたが今、どのグセの中にいるかがわかります。</p>
+    <div class="type-chip-row">
+      <span class="type-chip" style="background:var(--rose-deep)">過去グセ型</span>
+      <span class="type-chip" style="background:var(--gold)">未来グセ型</span>
+      <span class="type-chip" style="background:var(--plum)">反応グセ型</span>
+      <span class="type-chip" style="background:var(--sage)">ぐるぐる型</span>
+      <span class="type-chip" style="background:var(--slate)">あと一歩型</span>
+    </div>
+    <button class="btn" onclick="startQuiz()">診断をはじめる</button>
+  </div>
+
+  <div id="quiz">
+    <div class="progress-wrap">
+      <div class="progress-label" id="progressLabel">Q1 / 6</div>
+      <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:16.6%"></div></div>
+    </div>
+    <p class="q-text" id="qText"></p>
+    <div class="options" id="qOptions"></div>
+  </div>
+
+  <div id="result">
+    <span class="result-badge" id="resultBadge"></span>
+    <h2 id="resultTitle"></h2>
+    <div class="subname" id="resultSub"></div>
+    <div class="desc" id="resultDesc"></div>
+    <div class="bridge-box" id="resultBridge"></div>
+    <a class="btn" id="ctaBtn" href="https://utage-system.com/event/vXLoYg1vWyS8/register">脱出の仕方を、フロントセミナーで聞く</a>
+    <br>
+    <button class="retry" onclick="resetQuiz()">もう一度診断する</button>
+  </div>
+
+</div>
+
+<script>
+const questions = [
+  {
+    text: "大事な決断をする前、頭の中に一番よく浮かぶのは？",
+    options: [
+      { t:"A", label:"「あの時、ああしていれば」という後悔" },
+      { t:"B", label:"「もし失敗したら」という心配" },
+      { t:"C", label:"「どうせ私なんて」という気持ち" },
+      { t:"D", label:"色んな考えが次々浮かんで、収拾がつかない" },
+      { t:"E", label:"わりと落ち着いて考えられて、答えが少しずつ見えてくる" },
+    ]
+  },
+  {
+    text: "人からの何気ない一言に、心がざわついた時は？",
+    options: [
+      { t:"A", label:"昔の似た出来事を思い出して、そのときの気持ちがぶり返す" },
+      { t:"B", label:"「今後もこんなことが続くのでは」と、先を心配し始める" },
+      { t:"C", label:"いつもと同じ感情が、パッと出てくる" },
+      { t:"D", label:"過去も未来もいろいろ思い出して、頭がいっぱいになる" },
+      { t:"E", label:"一度立ち止まって、「今、何を感じているか」に気づける" },
+    ]
+  },
+  {
+    text: "「やりたいことがあるのに動けない」時、頭の中にあるのは？",
+    options: [
+      { t:"A", label:"前に挑戦して、うまくいかなかった記憶" },
+      { t:"B", label:"この先起こりうる、うまくいかない可能性" },
+      { t:"C", label:"「私には無理」という、いつもの思い込み" },
+      { t:"D", label:"あれもこれも気になって、結局何も決められない" },
+      { t:"E", label:"「本当はどうしたいか」は分かっているが、最後の一歩が踏み出せていない" },
+    ]
+  },
+  {
+    text: "眠る前、頭の中を占めているのは？",
+    options: [
+      { t:"A", label:"今日あった出来事の、「こう言えばよかった」という後悔" },
+      { t:"B", label:"明日、明後日の心配事" },
+      { t:"C", label:"誰かに言われた一言が、繰り返し頭に浮かぶ" },
+      { t:"D", label:"色んなことが次々浮かんで、なかなか寝付けない" },
+      { t:"E", label:"だいたい落ち着いて眠れる。たまに考え事をする程度" },
+    ]
+  },
+  {
+    text: "家族や周りの期待と、自分の本音がずれていると感じるときは？",
+    options: [
+      { t:"A", label:"「なんで昔、自分の意見を言わなかったんだろう」と思う" },
+      { t:"B", label:"「本音を言ったら、この先関係が変わるかも」と不安になる" },
+      { t:"C", label:"とりあえず、いつも通り相手に合わせてしまう" },
+      { t:"D", label:"本音も分からなくなるくらい、色々考えてしまう" },
+      { t:"E", label:"本音はうっすら分かっているが、言葉にするタイミングを探っている" },
+    ]
+  },
+  {
+    text: "この診断を受けようと思った、一番の理由は？",
+    options: [
+      { t:"A", label:"過去にとらわれている自分を、なんとかしたい" },
+      { t:"B", label:"心配ばかりしている自分を、変えたい" },
+      { t:"C", label:"いつも同じパターンを繰り返す自分に、気づきたい" },
+      { t:"D", label:"自分が今、何に一番とらわれているのか整理したい" },
+      { t:"E", label:"次の一歩を踏み出すきっかけが欲しい" },
+    ]
+  },
+];
+
+const results = {
+  A:{
+    title:"過去グセ型",
+    sub:"後悔ループタイプ",
+    color:"var(--rose-deep)",
+    desc:"あなたは、終わったことに何度も意識が戻ってしまう「過去グセ」タイプ。\n「あのとき、こうすればよかった」を、繰り返し体験してしまいます。\n\nこれは悪いことではなく、それだけ真剣に物事と向き合ってきた証拠です。ただ、気づかないままだと、いつまでも同じ場所にとどまってしまいます。",
+    bridge:"まず大事なのは、「あ、今、戻っていた」と気づくこと。そこから抜け出す<b>具体的な方法</b>は、フロントセミナーでお伝えします。"
+  },
+  B:{
+    title:"未来グセ型",
+    sub:"先回り不安タイプ",
+    color:"var(--gold)",
+    desc:"あなたは、まだ起きていないことを先に心配してしまう「未来グセ」タイプ。\n「失敗したら、どうしよう」が、いつも頭の中にあります。\n\n責任感が強く、準備熱心な人ほど、このグセが強く出ます。ただ、心配し続けているだけでは、今この瞬間の力を使いきれません。",
+    bridge:"今の自分に<b>意識を戻す方法</b>を、フロントセミナーでお伝えします。"
+  },
+  C:{
+    title:"反応グセ型",
+    sub:"いつもパターンタイプ",
+    color:"var(--plum)",
+    desc:"あなたは、何かあるたびに、いつもの感情パターンに戻ってしまう「反応グセ」タイプ。\n「どうせ私は」という感情が、条件反射のように出てきます。\n\n長年かけて作られてきたパターンなので、簡単には抜けにくいものです。",
+    bridge:"まずはその感情に気づいて、立ち止まること。その<b>具体的なやり方</b>を、フロントセミナーでお話しします。"
+  },
+  D:{
+    title:"ぐるぐる型",
+    sub:"全部ちょっとずつタイプ",
+    color:"var(--sage)",
+    desc:"あなたは、過去・未来・反応の3つが、状況によって少しずつ出てくる「ぐるぐる型」。\n特定の一つというより、あれこれ考えが浮かんで、頭がいっぱいになりやすいタイプです。\n\nこれは実は、とても頑張ってきた人に多いパターンです。整理の仕方さえ分かれば、驚くほどスッキリします。",
+    bridge:"その<b>整理の仕方</b>を、フロントセミナーでお伝えします。"
+  },
+  E:{
+    title:"あと一歩型",
+    sub:"もう整いかけタイプ",
+    color:"var(--slate)",
+    desc:"あなたは、すでに自分の状態に気づける力を持っている「あと一歩型」。\n本音も、うっすら見えています。\n\nただ、最後の一歩を踏み出す後押しが、もう少し必要な状態です。",
+    bridge:"その<b>後押しになる話</b>を、フロントセミナーでお伝えします。"
+  },
+};
+
+let current = 0;
+let answers = [];
+
+function startQuiz(){
+  document.getElementById('intro').style.display = 'none';
+  document.getElementById('quiz').style.display = 'block';
+  current = 0;
+  answers = [];
+  renderQuestion();
+}
+
+function renderQuestion(){
+  const q = questions[current];
+  document.getElementById('progressLabel').textContent = 'Q' + (current+1) + ' / ' + questions.length;
+  document.getElementById('progressFill').style.width = ((current+1)/questions.length*100) + '%';
+  document.getElementById('qText').textContent = q.text;
+  const wrap = document.getElementById('qOptions');
+  wrap.innerHTML = '';
+  q.options.forEach(opt => {
+    const btn = document.createElement('button');
+    btn.className = 'opt';
+    btn.textContent = opt.label;
+    btn.onclick = () => selectAnswer(opt.t);
+    wrap.appendChild(btn);
+  });
+}
+
+function selectAnswer(t){
+  answers.push(t);
+  current++;
+  if(current < questions.length){
+    renderQuestion();
+  } else {
+    showResult();
+  }
+}
+
+function showResult(){
+  document.getElementById('quiz').style.display = 'none';
+  const tally = {A:0,B:0,C:0,D:0,E:0};
+  answers.forEach(a => tally[a]++);
+  let best = 'A', bestCount = -1;
+  ['A','B','C','D','E'].forEach(k => {
+    if(tally[k] > bestCount){ bestCount = tally[k]; best = k; }
+  });
+  const r = results[best];
+  document.getElementById('resultBadge').textContent = '診断結果';
+  document.getElementById('resultBadge').style.color = r.color;
+  document.getElementById('resultTitle').textContent = r.title;
+  document.getElementById('resultTitle').style.color = r.color;
+  document.getElementById('resultSub').textContent = r.sub;
+  document.getElementById('resultDesc').textContent = r.desc;
+  document.getElementById('resultBridge').innerHTML = r.bridge;
+  document.getElementById('result').style.display = 'block';
+}
+
+function resetQuiz(){
+  document.getElementById('result').style.display = 'none';
+  document.getElementById('intro').style.display = 'block';
+}
+</script>
+
+</body>
+</html>
