@@ -9,18 +9,18 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;500;600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap">
 <style>
   :root{
-    --paper:#FBF4E9;
-    --paper-alt:#F2E4D0;
+    --paper:#EFF7FB;
+    --paper-alt:#E3F1F8;
     --surface:#FFFFFF;
-    --ink:#2B1B10;
-    --ink-soft:#7A6656;
-    --rose:#C4685F;
-    --rose-deep:#A8483F;
-    --sage:#7E8F62;
-    --gold:#BC8A3E;
-    --plum:#93789B;
-    --line:rgba(43,27,16,.14);
-    --line-soft:rgba(43,27,16,.08);
+    --ink:#16233F;
+    --ink-soft:#5C7290;
+    --rose:#E85C99;
+    --rose-deep:#C7217A;
+    --sage:#2AA7A0;
+    --gold:#D4A44F;
+    --plum:#5EA8C7;
+    --line:rgba(22,35,63,.14);
+    --line-soft:rgba(22,35,63,.08);
   }
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
@@ -45,8 +45,8 @@
   section{position:relative;}
   .band-alt{
     background:
-      radial-gradient(560px 340px at 88% -6%, rgba(147,120,155,.12), transparent 60%),
-      radial-gradient(480px 320px at 4% 104%, rgba(126,143,98,.12), transparent 55%),
+      radial-gradient(560px 340px at 88% -6%, rgba(94,168,199,.12), transparent 60%),
+      radial-gradient(480px 320px at 4% 104%, rgba(42,167,160,.12), transparent 55%),
       var(--paper-alt);
   }
   .band-surface{background:var(--surface);}
@@ -71,18 +71,18 @@
   }
   .hero-photo-wrap::after{
     content:"";position:absolute;inset:0;
-    background:linear-gradient(180deg, rgba(43,27,16,0) 60%, rgba(43,27,16,.28) 100%);
+    background:linear-gradient(180deg, rgba(22,35,63,0) 60%, rgba(22,35,63,.28) 100%);
     pointer-events:none;
   }
   .hero{
     padding:56px 0 96px;
     overflow:hidden;
     background:
-      radial-gradient(720px 420px at 12% -8%, rgba(196,104,95,.14), transparent 60%),
-      radial-gradient(640px 500px at 100% 8%, rgba(188,138,62,.12), transparent 55%),
+      radial-gradient(720px 420px at 12% -8%, rgba(232,92,153,.14), transparent 60%),
+      radial-gradient(640px 500px at 100% 8%, rgba(212,164,79,.12), transparent 55%),
       var(--paper);
   }
-  .beam{position:absolute;background:linear-gradient(90deg, rgba(196,104,95,0) 0%, rgba(196,104,95,.10) 50%, rgba(196,104,95,0) 100%);pointer-events:none;}
+  .beam{position:absolute;background:linear-gradient(90deg, rgba(232,92,153,0) 0%, rgba(232,92,153,.10) 50%, rgba(232,92,153,0) 100%);pointer-events:none;}
   .beam.b1{width:1400px;height:70px;left:-380px;top:60px;transform:rotate(-16deg);}
   .beam.b2{width:1400px;height:50px;left:-260px;top:340px;transform:rotate(-16deg);opacity:.7;}
   .hero-inner{position:relative;text-align:center;}
@@ -127,7 +127,7 @@
   .cta-btn{
     display:inline-block;
     background:var(--rose-deep);
-    color:#FBF4E9;
+    color:#EFF7FB;
     font-family:"Shippori Mincho B1",serif;
     font-weight:700;
     font-size:17px;
@@ -135,17 +135,17 @@
     padding:19px 46px;
     border-radius:2px;
     text-decoration:none;
-    box-shadow:0 10px 26px rgba(168,72,63,.28);
+    box-shadow:0 10px 26px rgba(199,33,122,.28);
   }
   .cta-note{margin-top:14px;font-size:13px;color:var(--ink-soft);}
   .hero-gift{
     margin:40px auto 0;max-width:500px;text-align:left;
     background:var(--surface);border:1px solid var(--rose);border-radius:3px;
-    padding:24px 28px;box-shadow:0 14px 34px rgba(43,27,16,.12);
+    padding:24px 28px;box-shadow:0 14px 34px rgba(22,35,63,.12);
   }
   .hero-gift-tag{
     display:inline-block;font-size:12px;font-weight:700;letter-spacing:.06em;
-    background:var(--rose-deep);color:#FBF4E9;padding:6px 12px;border-radius:2px;
+    background:var(--rose-deep);color:#EFF7FB;padding:6px 12px;border-radius:2px;
     margin-bottom:12px;
   }
   .hero-gift-text{margin:0;font-size:14px;line-height:1.9;color:var(--ink);}
@@ -173,7 +173,7 @@
   .habit-row{
     display:grid;grid-template-columns:120px 1fr;gap:22px;align-items:start;
     padding:24px 26px;background:var(--surface);border-radius:4px;
-    box-shadow:0 10px 26px rgba(43,27,16,.08);
+    box-shadow:0 10px 26px rgba(22,35,63,.08);
     border-left:4px solid var(--line);
   }
   .habit-row.h1{border-left-color:var(--rose-deep);}
@@ -195,7 +195,7 @@
   .cause-close{
     margin-top:32px;padding:26px 28px;background:var(--surface);
     border-radius:4px;font-size:15px;color:var(--ink-soft);
-    box-shadow:0 10px 26px rgba(43,27,16,.08);
+    box-shadow:0 10px 26px rgba(22,35,63,.08);
   }
   .cause-highlight{
     color:var(--rose-deep);font-weight:700;font-size:19px;
@@ -212,11 +212,11 @@
     font-size:16px;font-weight:700;color:var(--ink);
     background:var(--surface);border:1px solid var(--line);
     padding:13px 22px;border-radius:24px;
-    box-shadow:0 8px 18px rgba(43,27,16,.08);
+    box-shadow:0 8px 18px rgba(22,35,63,.08);
   }
   .flow-step:last-child{
-    background:var(--rose-deep);color:#FBF4E9;border-color:var(--rose-deep);
-    box-shadow:0 12px 26px rgba(168,72,63,.30);
+    background:var(--rose-deep);color:#EFF7FB;border-color:var(--rose-deep);
+    box-shadow:0 12px 26px rgba(199,33,122,.30);
   }
   .flow-arrow{color:var(--rose-deep);font-size:18px;font-weight:700;}
   .def-box{
@@ -294,7 +294,7 @@
   .day-list .t{font-size:16px;font-weight:700;margin-bottom:2px;}
   .day-list .d{font-size:14px;color:var(--ink-soft);}
   .day-list li > div.day-body{flex:1;min-width:0;}
-  .day-thumb{flex:none;width:120px;height:120px;border-radius:8px;object-fit:cover;box-shadow:0 10px 24px rgba(43,27,16,.18);}
+  .day-thumb{flex:none;width:120px;height:120px;border-radius:8px;object-fit:cover;box-shadow:0 10px 24px rgba(22,35,63,.18);}
   @media (max-width:520px){ .day-list li{flex-wrap:wrap;} .day-thumb{width:100%;height:180px;order:3;margin-top:4px;} }
   .fine-note{margin-top:18px;font-size:13px;color:var(--ink-soft);line-height:1.8;}
   .gift-box{
@@ -303,7 +303,7 @@
   }
   .gift-box .tag{
     flex:none;font-size:11px;font-weight:700;letter-spacing:.06em;
-    background:var(--rose-deep);color:#FBF4E9;padding:5px 10px;border-radius:2px;
+    background:var(--rose-deep);color:#EFF7FB;padding:5px 10px;border-radius:2px;
   }
 
   /* ---------- PROFILE ---------- */
@@ -311,7 +311,7 @@
   .profile-photo{
     flex:none;width:220px;height:220px;border-radius:50%;
     overflow:hidden;position:relative;
-    box-shadow:0 0 0 1px var(--line), 0 20px 40px rgba(43,27,16,.14);
+    box-shadow:0 0 0 1px var(--line), 0 20px 40px rgba(22,35,63,.14);
   }
   .profile-photo::after{
     content:"";position:absolute;inset:0;border-radius:50%;
@@ -360,7 +360,7 @@
   .final{
     text-align:center;padding:110px 0 90px;
     background:
-      radial-gradient(600px 380px at 50% 0%, rgba(196,104,95,.14), transparent 60%),
+      radial-gradient(600px 380px at 50% 0%, rgba(232,92,153,.14), transparent 60%),
       var(--paper-alt);
   }
   .final h2{font-size:clamp(24px,4vw,32px);}
@@ -481,9 +481,9 @@
 
     <div class="breath-mark" aria-hidden="true">
       <svg viewBox="0 0 64 64" width="52" height="52" fill="none">
-        <circle cx="32" cy="32" r="5" fill="#C4685F"/>
-        <circle cx="32" cy="32" r="15" stroke="#C4685F" stroke-width="1.3" opacity=".4"/>
-        <circle cx="32" cy="32" r="25" stroke="#BC8A3E" stroke-width="1.1" opacity=".25"/>
+        <circle cx="32" cy="32" r="5" fill="#E85C99"/>
+        <circle cx="32" cy="32" r="15" stroke="#E85C99" stroke-width="1.3" opacity=".4"/>
+        <circle cx="32" cy="32" r="25" stroke="#D4A44F" stroke-width="1.1" opacity=".25"/>
       </svg>
     </div>
 
@@ -505,7 +505,7 @@
 <!-- ============ 静けさの一枚 ============ -->
 <section style="padding:64px 0;">
   <div class="measure" style="text-align:center;">
-    <img src="candle-photo.png" alt="整う、という時間" style="max-width:340px;width:100%;border-radius:4px;box-shadow:0 20px 50px rgba(43,27,16,.18);">
+    <img src="candle-photo.png" alt="整う、という時間" style="max-width:340px;width:100%;border-radius:4px;box-shadow:0 20px 50px rgba(22,35,63,.18);">
   </div>
 </section>
 
